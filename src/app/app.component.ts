@@ -8,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   readonly ROUTER_UTILS = ROUTER_UTILS;
+
+  public isCollapsed = false;
 }
