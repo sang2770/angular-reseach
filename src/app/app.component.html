@@ -1,10 +1,15 @@
 <nz-layout class="layout">
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
-    <div class="logo"></div>
+    <div class="logo">
+      <img src="favicon.ico" />
+      <span> Angular</span>
+    </div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-submenu nzTitle="Version17" nzIcon="swap">
         <ul>
-          <li nz-menu-item>Web Container</li>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="ROUTER_UTILS.version.V17.getWebContainer">Web Container</a>
+          </li>
           <li nz-menu-item>New Syntax</li>
           <li nz-menu-item>Deferrable View</li>
         </ul>

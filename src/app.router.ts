@@ -5,6 +5,7 @@ export const ROUTER_UTILS = {
       categories: 'categories',
       getCategories: 'v17/categories',
       webContainer: 'web-container',
+      getWebContainer: 'v17/web-container',
       newSyntax: 'new-syntax',
       deferrableView: 'deferrable-view',
       serveSideRendering: 'ssr',

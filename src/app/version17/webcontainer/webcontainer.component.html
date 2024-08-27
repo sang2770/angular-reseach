@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="editor">
+    <textarea #editor [(ngModel)]="fileContents" (ngModelChange)="onEditChange($event)"></textarea>
+  </div>
+  <div class="preview">
+    <iframe #preview src="/"></iframe>
+    <div class="terminal" >
+      <div class="" #terminal></div>
+    </div>
+  </div>
+</div>

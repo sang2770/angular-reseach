@@ -15,8 +15,16 @@
 
 .logo {
   height: 32px;
-  background: rgba(255, 255, 255, 0.2);
   margin: 16px;
+  display: flex;
+  align-items: center;
+  color: white;
+  gap: 10px;
+  justify-content: center;
+  img{
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 nz-header {
