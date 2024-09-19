@@ -1,0 +1,56 @@
+<div class="chat-container">
+    <button class="toggle-panel-button" (click)="toggleChatPanel()">
+        >>
+    </button>
+    <div class="chat-panel" [class.show-panel]="showChatPanel">
+        
+        <h3>Chat Groups</h3>
+        <ul>
+            <li *ngFor="let group of chatGroups" (click)="selectChatGroup(group.id)" [class.active]="group.id === selectedGroupId">
+                {{ group.name }}
+            </li>
+        </ul>
+        <button class="btn" (click)="createNewChatGroup()">New Chat</button>
+    </div>
+
+    <div class="chat-main">
+        <div class="chat-window-container">
+            <div #chatWindow class="chat-window" (scroll)="onScroll()">
+                <!-- Chat Window -->
+                <div *ngFor="let message of currentMessages" class="message"
+                    [ngClass]="{'user-message': message.sender === 'user', 'ai-message': message.sender === 'ai'}">
+                    <ng-container *ngIf="message.sender === 'user'">
+                        {{ message.text }}
+                    </ng-container>
+                    <ng-container *ngIf="message.sender === 'ai'">
+                        <div [innerHTML]="formatMessage(message.text)"></div>
+                    </ng-container>
+                </div>
+
+                <div *ngIf="isTyping" class="typing-indicator">
+                    <span>AI is typing</span>
+                    <span class="dots">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </span>
+                </div>
+            </div>
+            <button *ngIf="showScrollToTop" class="scroll-button scroll-to-top" (click)="scrollToTop()">
+                <i nz-icon nzType="up" nzTheme="outline"></i>
+            </button>
+            <button *ngIf="showScrollToBottom" class="scroll-button scroll-to-bottom" (click)="scrollToBottom()">
+                <i nz-icon nzType="down" nzTheme="outline"></i>
+            </button>
+        </div>
+
+        <!-- Input Area -->
+        <form *ngIf="chatForm" [formGroup]="chatForm" (ngSubmit)="sendMessage()" class="chat-input">
+            <input type="text" formControlName="message" placeholder="Type your message..." />
+            <button type="button" (click)="toggleVoiceInput()" [class.active]="isListening">
+                {{ isListening ? 'Stop' : 'Voice' }}
+            </button>
+            <button type="submit" [disabled]="!chatForm.valid">Send</button>
+        </form>
+    </div>
+</div>

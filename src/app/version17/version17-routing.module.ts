@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ROUTER_UTILS } from '../../app.router';
 import { NewFeatureComponent } from './new-feature/new-feature.component';
 import { WebContainerComponent } from './webcontainer/webcontainer.component';
+import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: ROUTER_UTILS.version.V17.webContainer,
     component: WebContainerComponent
+  },
+  {
+    path: ROUTER_UTILS.version.V17.chat,
+    component: ChatComponent
   }
 ];
 

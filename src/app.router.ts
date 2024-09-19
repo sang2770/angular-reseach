@@ -11,6 +11,8 @@ export const ROUTER_UTILS = {
       serveSideRendering: 'ssr',
       lifecycle: 'lifecycle',
       viteBuild: 'vite-build',
+      chat: 'chat',
+      getChat: 'v17/chat',
     },
   },
 };
