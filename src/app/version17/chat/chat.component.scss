@@ -13,10 +13,12 @@
     display: flex;
     width: 100%;
     position: relative;
-    height: 100vh;
     background-color: #f0f2f5;
     margin-top: 10px;
     border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .chat-panel {
@@ -272,8 +274,8 @@
 
 .toggle-panel-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    bottom: 10px;
+    left: 10px;
     z-index: 1000;
     background-color: #ffffff;
     border: none;

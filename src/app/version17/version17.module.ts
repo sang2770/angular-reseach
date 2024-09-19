@@ -6,15 +6,16 @@ import { WebContainerComponent } from './webcontainer/webcontainer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChatComponent } from './chat/chat.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 @NgModule({
   declarations: [WebContainerComponent, ChatComponent],
   imports: [
     CommonModule,
-    FormsModule,
     Version17RoutingModule,
+    NzIconModule,
+    NzSwitchModule,
     ReactiveFormsModule,
-    NzIconModule
+    FormsModule
   ]
 })
 export class Version17Module { }

@@ -1,16 +1,19 @@
 <div class="chat-container">
     <button class="toggle-panel-button" (click)="toggleChatPanel()">
-        >>
+        <span nz-icon nzType="left" nzTheme="outline" *ngIf="showChatPanel"></span>
+        <span nz-icon nzType="right" nzTheme="outline" *ngIf="!showChatPanel"></span>
     </button>
     <div class="chat-panel" [class.show-panel]="showChatPanel">
-        
+
         <h3>Chat Groups</h3>
         <ul>
-            <li *ngFor="let group of chatGroups" (click)="selectChatGroup(group.id)" [class.active]="group.id === selectedGroupId">
+            <li *ngFor="let group of chatGroups" (click)="selectChatGroup(group.id)"
+                [class.active]="group.id === selectedGroupId">
                 {{ group.name }}
             </li>
         </ul>
         <button class="btn" (click)="createNewChatGroup()">New Chat</button>
+        <nz-switch style="margin-top: 10px;" [(ngModel)]="autoRead"></nz-switch>
     </div>
 
     <div class="chat-main">
@@ -23,7 +26,8 @@
                         {{ message.text }}
                     </ng-container>
                     <ng-container *ngIf="message.sender === 'ai'">
-                        <div [innerHTML]="formatMessage(message.text)"></div>
+                        <div style="cursor: pointer;" [innerHTML]="formatMessage(message.text)"
+                            (click)="readMessage(message)"></div>
                     </ng-container>
                 </div>
 
@@ -47,10 +51,14 @@
         <!-- Input Area -->
         <form *ngIf="chatForm" [formGroup]="chatForm" (ngSubmit)="sendMessage()" class="chat-input">
             <input type="text" formControlName="message" placeholder="Type your message..." />
-            <button type="button" (click)="toggleVoiceInput()" [class.active]="isListening">
+            <button type="button" (click)="toggleVoiceInput()" >
                 {{ isListening ? 'Stop' : 'Voice' }}
             </button>
             <button type="submit" [disabled]="!chatForm.valid">Send</button>
+            <button class="stop-reading-button" (click)="stopReading()"
+                *ngIf="this.chatService?.speechSynthesis?.speaking">
+                Stop Reading
+            </button>
         </form>
     </div>
 </div>

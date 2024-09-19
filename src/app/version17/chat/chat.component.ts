@@ -21,10 +21,11 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   showChatPanel: boolean = true;
   private recognition: any;
   isListening: boolean = false;
+  autoRead: boolean = false;
 
   constructor(
     private fb: FormBuilder,
-    private chatService: GeminiChatService,
+    public chatService: GeminiChatService,
     private cdr: ChangeDetectorRef,
     private ngZone: NgZone
   ) {
@@ -41,6 +42,12 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.chatService.getCurrentMessages().subscribe(messages => {
       this.currentMessages = messages;
       this.scrollToBottom();
+      if (this.autoRead && messages.length > 0) {
+        const lastMessage = messages[messages.length - 1];
+        if (lastMessage.sender === 'ai') {
+          this.readMessage(lastMessage);
+        }
+      }
     });
     this.initSpeechRecognition();
   }
@@ -172,4 +179,11 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     });
   }
 
+  readMessage(message: ChatMessage) {
+    this.chatService.readMessageAloud(message.text);
+  }
+
+  stopReading() {
+    this.chatService.stopReading();
+  }
 }
